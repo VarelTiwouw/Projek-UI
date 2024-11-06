@@ -7,13 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data;
+using MySql.Data.MySqlClient;
 
 namespace Projek_UI
 {
     public partial class FrmLogin : Form
     {
+        private MySqlConnection koneksi;
+        private MySqlDataAdapter adapter;
+        private MySqlCommand perintah;
+
+        private DataSet ds = new DataSet();
+        private string alamat, query;
         public FrmLogin()
         {
+            alamat = "server=localhost; database=db_biscash; username=root; password=;";
+            koneksi = new MySqlConnection(alamat);
             InitializeComponent();
         }
 
@@ -29,16 +39,49 @@ namespace Projek_UI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (txtUsername.Text == "Varel" && txtPassword.Text == "123")
+            try
             {
-                FormPenjualan formPenjualan = new FormPenjualan();
-                formPenjualan.Show();
-                this.Hide();
+                query = string.Format("select * from tb_user where username = '{0}'", txtUsername.Text);
+                ds.Clear();
+                koneksi.Open();
+                perintah = new MySqlCommand(query, koneksi);
+                adapter = new MySqlDataAdapter(perintah);
+                perintah.ExecuteNonQuery();
+                adapter.Fill(ds);
+                koneksi.Close();
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow kolom in ds.Tables[0].Rows)
+                    {
+                        string sandi;
+                        sandi = kolom["password"].ToString();
+                        if (sandi == txtPassword.Text)
+                        {
+                            FormMain formMain = new FormMain();
+                            formMain.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Anda salah input password");
+                        }
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Username tidak ditemukan");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Username atau Password salah");
+                MessageBox.Show(ex.ToString());
             }
+            this.Hide();
+        }
+
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

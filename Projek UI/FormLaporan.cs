@@ -44,5 +44,15 @@ namespace Projek_UI
             frmLogin.Show();
             this.Hide();
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void FormLaporan_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

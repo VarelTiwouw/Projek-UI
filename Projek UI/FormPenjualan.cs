@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace Projek_UI
 {
@@ -17,47 +18,94 @@ namespace Projek_UI
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void FormPenjualan_Load(object sender, EventArgs e)
         {
-            FormBarang formBarang = new FormBarang();
-            formBarang.Show();
-            this.Hide();
+
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void label3_Click(object sender, EventArgs e)
         {
-            FormLaporan formLaporan = new FormLaporan();
-            formLaporan.Show();
-            this.Hide();
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox4_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtKodeBarang_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNamaBarang_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
+
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void txtHargaBarang_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void txtTotal_Enter(object sender, EventArgs e)
         {
 
         }
 
-        private void logout_Click(object sender, EventArgs e)
+        private void txtSubTotal_Enter(object sender, EventArgs e)
         {
-            FrmLogin frmLogin = new FrmLogin();
-            frmLogin.Show();
-            this.Hide();
+
         }
 
-        private void Statistik_Click(object sender, EventArgs e)
+        private void btnTambahBarang_Click(object sender, EventArgs e)
         {
-            FormStatistik formStatistik = new FormStatistik();
-            formStatistik.Show();
-            this.Hide();
+
+        }
+
+        private void dg_tabletransaksi_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void txtBayar_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtKembalian_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
