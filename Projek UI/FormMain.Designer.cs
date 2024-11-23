@@ -31,16 +31,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.submenu_login = new System.Windows.Forms.ToolStripMenuItem();
-            this.submenu_logout = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.signUpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.submenu_logout = new System.Windows.Forms.ToolStripMenuItem();
             this.masterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.submenu_barang = new System.Windows.Forms.ToolStripMenuItem();
             this.traToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.submenu_penjualan = new System.Windows.Forms.ToolStripMenuItem();
             this.laporanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.formlaporanbarang = new System.Windows.Forms.ToolStripMenuItem();
+            this.formlaporanpenjualan = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,38 +61,31 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.submenu_login,
-            this.submenu_logout,
+            this.signUpToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.signUpToolStripMenuItem});
+            this.submenu_logout});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // submenu_login
+            // signUpToolStripMenuItem
             // 
-            this.submenu_login.Name = "submenu_login";
-            this.submenu_login.Size = new System.Drawing.Size(224, 26);
-            this.submenu_login.Text = "Login";
-            // 
-            // submenu_logout
-            // 
-            this.submenu_logout.Name = "submenu_logout";
-            this.submenu_logout.Size = new System.Drawing.Size(224, 26);
-            this.submenu_logout.Text = "Log out";
-            this.submenu_logout.Click += new System.EventHandler(this.submenu_logout_Click);
+            this.signUpToolStripMenuItem.Name = "signUpToolStripMenuItem";
+            this.signUpToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.signUpToolStripMenuItem.Text = "Sign Up";
+            this.signUpToolStripMenuItem.Click += new System.EventHandler(this.signUpToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(221, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(141, 6);
             // 
-            // signUpToolStripMenuItem
+            // submenu_logout
             // 
-            this.signUpToolStripMenuItem.Name = "signUpToolStripMenuItem";
-            this.signUpToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.signUpToolStripMenuItem.Text = "Sign Up";
-            this.signUpToolStripMenuItem.Click += new System.EventHandler(this.signUpToolStripMenuItem_Click);
+            this.submenu_logout.Name = "submenu_logout";
+            this.submenu_logout.Size = new System.Drawing.Size(144, 26);
+            this.submenu_logout.Text = "Log out";
+            this.submenu_logout.Click += new System.EventHandler(this.submenu_logout_Click);
             // 
             // masterToolStripMenuItem
             // 
@@ -128,17 +120,17 @@
             // laporanToolStripMenuItem
             // 
             this.laporanToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.formlaporanbarang});
+            this.formlaporanpenjualan});
             this.laporanToolStripMenuItem.Name = "laporanToolStripMenuItem";
             this.laporanToolStripMenuItem.Size = new System.Drawing.Size(77, 24);
             this.laporanToolStripMenuItem.Text = "Laporan";
             // 
-            // formlaporanbarang
+            // formlaporanpenjualan
             // 
-            this.formlaporanbarang.Name = "formlaporanbarang";
-            this.formlaporanbarang.Size = new System.Drawing.Size(197, 26);
-            this.formlaporanbarang.Text = "Laporan Barang";
-            this.formlaporanbarang.Click += new System.EventHandler(this.formlaporanbarang_Click);
+            this.formlaporanpenjualan.Name = "formlaporanpenjualan";
+            this.formlaporanpenjualan.Size = new System.Drawing.Size(224, 26);
+            this.formlaporanpenjualan.Text = "Laporan Penjualan";
+            this.formlaporanpenjualan.Click += new System.EventHandler(this.formlaporanpenjualan_Click);
             // 
             // FormMain
             // 
@@ -158,6 +150,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormMain";
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.Resize += new System.EventHandler(this.FormMain_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -173,10 +166,9 @@
         private System.Windows.Forms.ToolStripMenuItem traToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem submenu_penjualan;
         private System.Windows.Forms.ToolStripMenuItem submenu_barang;
-        private System.Windows.Forms.ToolStripMenuItem submenu_login;
         private System.Windows.Forms.ToolStripMenuItem submenu_logout;
         private System.Windows.Forms.ToolStripMenuItem laporanToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem formlaporanbarang;
+        private System.Windows.Forms.ToolStripMenuItem formlaporanpenjualan;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem signUpToolStripMenuItem;
     }

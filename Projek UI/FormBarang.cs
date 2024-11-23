@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -20,13 +21,18 @@ namespace Projek_UI
         private MySqlCommand perintah;
         private DataSet ds = new DataSet();
         private string alamat, query;
-      
+
+
+
         public FormBarang()
         {
             alamat = "server=localhost; database=db_biscash; username=root; password=;";
             koneksi = new MySqlConnection(alamat);
 
             InitializeComponent();
+       
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,19 +48,9 @@ namespace Projek_UI
             formBarang.Show();
             this.Hide();
         }
-
-        private void Statistik_Click(object sender, EventArgs e)
-        {
-            FormStatistik formStatistik = new FormStatistik();
-            formStatistik.Show();
-            this.Hide();
-        }
-
         private void Laporan_Click(object sender, EventArgs e)
         {
-            FormLaporan formLaporan = new FormLaporan();
-            formLaporan.Show();
-            this.Hide();
+            
         }
 
         private void logout_Click(object sender, EventArgs e)
@@ -71,7 +67,23 @@ namespace Projek_UI
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
+                txt_id_barang.Text = row.Cells["id_barang"].Value.ToString();
+                txt_nama_barang.Text = row.Cells["nama_barang"].Value.ToString();
+                txt_harga_beli.Text = row.Cells["harga_beli"].Value.ToString();
+                txt_harga_jual.Text = row.Cells["harga_jual"].Value.ToString();
+                txt_stock_barang.Text = row.Cells["stock_barang"].Value.ToString();
+                cb_satuan.Text = row.Cells["satuan_barang"].Value.ToString();
+
+
+                btn_save.Enabled = false;
+                btn_update.Enabled = true;
+                btn_delete.Enabled = true;
+                btn_clear.Enabled = true;
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -91,7 +103,7 @@ namespace Projek_UI
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-             try
+            try
             {
                 if (txt_nama_barang.Text != "" && txt_harga_beli.Text != "" && txt_harga_jual.Text != "" && txt_stock_barang.Text != "")
                 {
@@ -118,6 +130,7 @@ namespace Projek_UI
                 {
                     MessageBox.Show("Data Tidak lengkap !!");
                 }
+
             }
             catch (Exception ex)
             {
@@ -129,50 +142,41 @@ namespace Projek_UI
         {
             try
             {
-                if (txt_nama_barang.Text != "")
+             
+                if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    query = string.Format("select * from tb_produk where nama_barang = '{0}'", txt_nama_barang.Text);
-                    ds.Clear();
-                    koneksi.Open();
-                    perintah = new MySqlCommand(query, koneksi);
-                    adapter = new MySqlDataAdapter(perintah);
-                    perintah.ExecuteNonQuery();
-                    adapter.Fill(ds);
-                    koneksi.Close();
-                    if (ds.Tables[0].Rows.Count > 0)
-                    {
-                        foreach (DataRow kolom in ds.Tables[0].Rows)
-                        {
-                            txt_id_barang.Text = kolom["id_barang"].ToString();
-                            txt_harga_beli.Text = kolom["harga_beli"].ToString();
-                            txt_harga_jual.Text = kolom["harga_jual"].ToString();
-                            txt_stock_barang.Text = kolom["stock_barang"].ToString();
-                            cb_satuan.Text = kolom["satuan_barang"].ToString();
+                
+                    DataGridViewRow row = dataGridView1.SelectedRows[0];
 
-                        }
-                        txt_nama_barang.Enabled = true;
-                        dataGridView1.DataSource = ds.Tables[0];
-                        btn_save.Enabled = false;
-                        btn_update.Enabled = true;
-                        btn_delete.Enabled = true;
-                        btn_search.Enabled = false;
-                        btn_clear.Enabled = true;
-                    }
-                    else
+                   
+                    foreach (DataGridViewCell cell in row.Cells)
                     {
-                        MessageBox.Show("Data Tidak Ada !!");
-                        FormBarang_Load(null, null);
+                        Console.WriteLine("Column Name: " + row.Cells[cell.ColumnIndex].OwningColumn.Name);
                     }
 
+               
+                    txt_id_barang.Text = row.Cells["id_barang"].Value.ToString();
+                    txt_nama_barang.Text = row.Cells["nama_barang"].Value.ToString();
+                    txt_harga_beli.Text = row.Cells["harga_beli"].Value.ToString();
+                    txt_harga_jual.Text = row.Cells["harga_jual"].Value.ToString();
+                    txt_stock_barang.Text = row.Cells["stock_barang"].Value.ToString();
+                    cb_satuan.Text = row.Cells["satuan_barang"].Value.ToString();
+
+               
+                    btn_save.Enabled = false; 
+                    btn_update.Enabled = true;
+                    btn_delete.Enabled = true; 
+                    btn_clear.Enabled = true;  
                 }
                 else
                 {
-                    MessageBox.Show("Data Yang Anda Pilih Tidak Ada !!");
+
+                    MessageBox.Show("Silakan pilih data terlebih dahulu di DataGridView!");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Error: " + ex.Message);
             }
         }
 
@@ -191,7 +195,7 @@ namespace Projek_UI
                     {
                         query = string.Format("Delete from tb_produk where id_barang = '{0}'", txt_id_barang.Text);
                         ds.Clear();
-                        koneksi.Open(); 
+                        koneksi.Open();
                         perintah = new MySqlCommand(query, koneksi);
                         adapter = new MySqlDataAdapter(perintah);
                         int res = perintah.ExecuteNonQuery();
@@ -211,6 +215,7 @@ namespace Projek_UI
                 {
                     MessageBox.Show("Data Yang Anda Pilih Tidak Ada !!");
                 }
+
             }
             catch (Exception ex)
             {
@@ -228,6 +233,7 @@ namespace Projek_UI
             {
                 MessageBox.Show(ex.ToString());
             }
+
         }
 
         private void btn_update_Click(object sender, EventArgs e)
@@ -236,33 +242,47 @@ namespace Projek_UI
             {
                 if (txt_nama_barang.Text != "" && txt_harga_beli.Text != "" && txt_harga_jual.Text != "" && txt_stock_barang.Text != "" && cb_satuan.Text != "")
                 {
-
-                    query = string.Format("update tb_produk set nama_barang = '{0}', harga_beli = '{1}', harga_jual = '{2}', stock_barang = '{3}', satuan_barang = '{4}', where id_barang = '{5}'", txt_nama_barang.Text, txt_harga_beli.Text, txt_harga_jual.Text, txt_stock_barang.Text, cb_satuan.Text, txt_id_barang.Text);
-
+                    string query = "UPDATE tb_produk SET nama_barang = @nama_barang, harga_beli = @harga_beli, harga_jual = @harga_jual, stock_barang = @stock_barang, satuan_barang = @satuan_barang WHERE id_barang = @id_barang";
 
                     koneksi.Open();
-                    perintah = new MySqlCommand(query, koneksi);
-                    adapter = new MySqlDataAdapter(perintah);
-                    int res = perintah.ExecuteNonQuery();
-                    koneksi.Close();
-                    if (res == 1)
+                    using (MySqlCommand perintah = new MySqlCommand(query, koneksi))
                     {
-                        MessageBox.Show("Update Data Suksess ...");
-                        FormBarang_Load(null, null);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Gagal Update Data . . . ");
+                        perintah.Parameters.AddWithValue("@nama_barang", txt_nama_barang.Text);
+                        perintah.Parameters.AddWithValue("@harga_beli", txt_harga_beli.Text);
+                        perintah.Parameters.AddWithValue("@harga_jual", txt_harga_jual.Text);
+                        perintah.Parameters.AddWithValue("@stock_barang", txt_stock_barang.Text);
+                        perintah.Parameters.AddWithValue("@satuan_barang", cb_satuan.Text);
+                        perintah.Parameters.AddWithValue("@id_barang", txt_id_barang.Text);
+
+                        int res = perintah.ExecuteNonQuery();
+
+                        if (res == 1)
+                        {
+                            MessageBox.Show("Update Data Sukses!");
+                            FormBarang_Load(null, null);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Gagal Update Data.");
+                        }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Data Tidak lengkap !!");
+                    MessageBox.Show("Data Tidak Lengkap!");
                 }
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Error: " + ex.Message);
+            }
+            finally
+            {
+                if (koneksi.State == System.Data.ConnectionState.Open)
+                {
+                    koneksi.Close();
+                }
             }
         }
 
@@ -273,27 +293,91 @@ namespace Projek_UI
 
         private void txt_nama_barang_TextChanged(object sender, EventArgs e)
         {
+            try
+            {
+                txt_nama_barang.Text = txt_nama_barang.Text.ToUpper();
+                txt_nama_barang.SelectionStart = txt_nama_barang.Text.Length;
 
+                if (!string.IsNullOrEmpty(txt_nama_barang.Text))
+                {
+                    query = string.Format("SELECT * FROM tb_produk WHERE nama_barang LIKE '{0}%' ORDER BY nama_barang ASC", txt_nama_barang.Text);
+
+                    ds.Clear();
+                    koneksi.Open();
+                    perintah = new MySqlCommand(query, koneksi);
+                    adapter = new MySqlDataAdapter(perintah);
+                    adapter.Fill(ds);
+                    koneksi.Close();
+
+                    dataGridView1.DataSource = ds.Tables[0];
+                }
+                else
+                {
+                    FormBarang_Load(null, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
         }
+        private void txt_id_barang_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(txt_id_barang.Text))
+                {
+                    query = string.Format("SELECT * FROM tb_produk WHERE id_barang LIKE '{0}%' ORDER BY id_barang ASC", txt_id_barang.Text);
+
+                    ds.Clear();
+                    koneksi.Open();
+                    perintah = new MySqlCommand(query, koneksi);
+                    adapter = new MySqlDataAdapter(perintah);
+                    adapter.Fill(ds);
+                    koneksi.Close();
+
+                    dataGridView1.DataSource = ds.Tables[0];
+                }
+                else
+                {
+                    FormBarang_Load(null, null);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
 
         private void FormBarang_Load(object sender, EventArgs e)
         {
             try
             {
-                koneksi.Open();
-                query = string.Format("select * from tb_produk");
+                if (koneksi.State == System.Data.ConnectionState.Open)
+                {
+                    koneksi.Close();
+                }
+
+                koneksi.Open(); 
+
+                query = "SELECT * FROM tb_produk";
                 perintah = new MySqlCommand(query, koneksi);
                 adapter = new MySqlDataAdapter(perintah);
                 perintah.ExecuteNonQuery();
                 ds.Clear();
                 adapter.Fill(ds);
-                koneksi.Close();
+                koneksi.Close(); 
+
                 dataGridView1.DataSource = ds.Tables[0];
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+
                 dataGridView1.Columns[0].Width = 100;
                 dataGridView1.Columns[0].HeaderText = "ID Barang";
                 dataGridView1.Columns[1].Width = 150;
@@ -316,14 +400,20 @@ namespace Projek_UI
                 txt_id_barang.Focus();
                 btn_update.Enabled = false;
                 btn_delete.Enabled = false;
-                btn_clear.Enabled = false;
+                btn_clear.Enabled = true;
                 btn_save.Enabled = true;
                 btn_search.Enabled = true;
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                if (koneksi.State == System.Data.ConnectionState.Open)
+                {
+                    koneksi.Close();
+                }
             }
         }
     }

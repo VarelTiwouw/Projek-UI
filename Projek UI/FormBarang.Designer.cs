@@ -46,14 +46,10 @@
             this.btn_search = new System.Windows.Forms.Button();
             this.cb_satuan = new System.Windows.Forms.ComboBox();
             this.btn_clear = new System.Windows.Forms.Button();
-            this.BisCash = new System.Windows.Forms.Label();
-            this.logout = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -69,7 +65,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1180, 334);
+            this.dataGridView1.Size = new System.Drawing.Size(1180, 393);
             this.dataGridView1.TabIndex = 21;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -90,6 +86,7 @@
             this.txt_id_barang.Name = "txt_id_barang";
             this.txt_id_barang.Size = new System.Drawing.Size(133, 22);
             this.txt_id_barang.TabIndex = 25;
+            this.txt_id_barang.TextChanged += new System.EventHandler(this.txt_id_barang_TextChanged);
             // 
             // txt_stock_barang
             // 
@@ -240,44 +237,10 @@
             this.btn_clear.UseVisualStyleBackColor = true;
             this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
-            // BisCash
-            // 
-            this.BisCash.AutoSize = true;
-            this.BisCash.BackColor = System.Drawing.Color.Transparent;
-            this.BisCash.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BisCash.Font = new System.Drawing.Font("Mikela", 34.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BisCash.ForeColor = System.Drawing.Color.Gold;
-            this.BisCash.Location = new System.Drawing.Point(12, 6);
-            this.BisCash.Name = "BisCash";
-            this.BisCash.Size = new System.Drawing.Size(224, 56);
-            this.BisCash.TabIndex = 3;
-            this.BisCash.Text = "BisCash";
-            // 
-            // logout
-            // 
-            this.logout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.logout.Location = new System.Drawing.Point(1107, 12);
-            this.logout.Name = "logout";
-            this.logout.Size = new System.Drawing.Size(97, 38);
-            this.logout.TabIndex = 0;
-            this.logout.Text = "Logout";
-            this.logout.UseVisualStyleBackColor = true;
-            this.logout.Click += new System.EventHandler(this.logout_Click);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FloralWhite;
-            this.panel2.Controls.Add(this.logout);
-            this.panel2.Controls.Add(this.BisCash);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1232, 65);
-            this.panel2.TabIndex = 5;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
-            // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txt_id_barang);
@@ -292,33 +255,38 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(22, 71);
+            this.groupBox1.Location = new System.Drawing.Point(22, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(592, 190);
+            this.groupBox1.Size = new System.Drawing.Size(697, 190);
             this.groupBox1.TabIndex = 42;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Info Barang";
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(22, 339);
+            this.groupBox2.Location = new System.Drawing.Point(22, 280);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1182, 361);
+            this.groupBox2.Size = new System.Drawing.Size(1182, 420);
             this.groupBox2.TabIndex = 43;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Data Barang";
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.groupBox3.Controls.Add(this.btn_delete);
             this.groupBox3.Controls.Add(this.btn_save);
             this.groupBox3.Controls.Add(this.btn_update);
             this.groupBox3.Controls.Add(this.btn_clear);
             this.groupBox3.Controls.Add(this.btn_search);
-            this.groupBox3.Location = new System.Drawing.Point(22, 267);
+            this.groupBox3.Location = new System.Drawing.Point(22, 208);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(697, 66);
             this.groupBox3.TabIndex = 44;
@@ -334,14 +302,12 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.panel2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormBarang";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormBarang";
             this.Load += new System.EventHandler(this.FormBarang_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -369,9 +335,6 @@
         private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.ComboBox cb_satuan;
         private System.Windows.Forms.Button btn_clear;
-        private System.Windows.Forms.Label BisCash;
-        private System.Windows.Forms.Button logout;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;

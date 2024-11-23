@@ -84,9 +84,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(315, 174);
+            this.button1.Location = new System.Drawing.Point(315, 165);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 30);
             this.button1.TabIndex = 5;
             this.button1.Text = "Simpan";
             this.button1.UseVisualStyleBackColor = true;
@@ -103,6 +103,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FormSignUp";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormSignUp";

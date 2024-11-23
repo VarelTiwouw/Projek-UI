@@ -41,42 +41,40 @@ namespace Projek_UI
         {
             try
             {
-                query = string.Format("select * from tb_user where username = '{0}'", txtUsername.Text);
+                query = $"SELECT * FROM tb_user WHERE username = '{txtUsername.Text}'";
                 ds.Clear();
                 koneksi.Open();
                 perintah = new MySqlCommand(query, koneksi);
                 adapter = new MySqlDataAdapter(perintah);
-                perintah.ExecuteNonQuery();
                 adapter.Fill(ds);
                 koneksi.Close();
+
                 if (ds.Tables[0].Rows.Count > 0)
                 {
                     foreach (DataRow kolom in ds.Tables[0].Rows)
                     {
-                        string sandi;
-                        sandi = kolom["password"].ToString();
+                        string sandi = kolom["password"].ToString();
                         if (sandi == txtPassword.Text)
                         {
                             FormMain formMain = new FormMain();
                             formMain.Show();
+                            this.Hide();
                         }
                         else
                         {
-                            MessageBox.Show("Anda salah input password");
+                            MessageBox.Show("Password yang Anda masukkan salah. Silakan coba lagi.", "Login Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-
                 }
                 else
                 {
-                    MessageBox.Show("Username tidak ditemukan");
+                    MessageBox.Show("Username tidak ditemukan. Silakan coba lagi.", "Login Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("Terjadi kesalahan: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            this.Hide();
         }
 
         private void FrmLogin_Load(object sender, EventArgs e)
